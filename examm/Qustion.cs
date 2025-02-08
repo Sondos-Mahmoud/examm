@@ -24,7 +24,7 @@ namespace examm
             public string Body { get; set; }
             public int Mark { get; set; }
             public Answer[] AnswerList { get; set; }
-            public int AnswerCount { get; set; } // To track the number of answers added
+            public int AnswerCount { get; set; }
 
             public Question(string header, string body, int mark, int maxAnswers)
             {
@@ -50,6 +50,7 @@ namespace examm
 
             public abstract void DisplayQuestion();
         }
+
         public class TrueFalseQuestion : Question
         {
             public TrueFalseQuestion(string header, string body, int mark) : base(header, body, mark, 2) { }
@@ -76,6 +77,5 @@ namespace examm
 
 
 
-
-    }
+}
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,21 +57,75 @@ namespace examm
     }
 
     
+  
     public class FinalExam : Exam
     {
         public FinalExam(int time, int numberOfQuestions) : base(time, numberOfQuestions) { }
 
+        //public override void ShowExam()
+        //{
+        //    int totalMarks = 0;
+        //    int earnedMarks = 0;
+
+        //    foreach (var question in Questions)
+        //    {
+        //        if (question != null)
+        //        {
+        //            question.DisplayQuestion();
+        //            Console.Write("Please Enter The Answer Id: ");
+        //            int userAnswerId = int.Parse(Console.ReadLine());
+
+        //            if (userAnswerId == question.AnswerList[0].AnswerId)
+        //            {
+        //                earnedMarks += question.Mark;
+        //            }
+
+        //            totalMarks += question.Mark;
+        //        }
+        //    }
+
+        //    Console.WriteLine($"Your Grade is {earnedMarks} from {totalMarks}");
+        //}
         public override void ShowExam()
         {
-            foreach (var question in Questions)
+            int totalMarks = 0;
+            int earnedMarks = 0;
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            for (int i = 0; i < Questions.Length; i++)
             {
+                var question = Questions[i];
                 if (question != null)
                 {
+                    Console.WriteLine($"# Question {i + 1} : {question.Body}");
                     question.DisplayQuestion();
+
+                    Console.Write("Your Answer => ");
+                    int userAnswerId = int.Parse(Console.ReadLine());
+
+                    string userAnswerText = question.AnswerList[userAnswerId - 1].AnswerText;
+                    string rightAnswerText = question.AnswerList[0].AnswerText;
+
+                    Console.WriteLine($"Your Answer => {userAnswerText}");
+                    Console.WriteLine($"Right Answer => {rightAnswerText}");
+
+                    if (userAnswerId == question.AnswerList[0].AnswerId)
+                    {
+                        earnedMarks += question.Mark;
+                    }
+
+                    totalMarks += question.Mark;
                 }
             }
+
+            stopwatch.Stop();
+            Console.WriteLine($"Your Grade is {earnedMarks} from {totalMarks}");
+            Console.WriteLine($"Time = {stopwatch.Elapsed}");
+            Console.WriteLine("Thank You");
         }
     }
+
 
     public class PracticalExam : Exam
     {
@@ -78,14 +133,41 @@ namespace examm
 
         public override void ShowExam()
         {
-            foreach (var question in Questions)
+            int totalMarks = 0;
+            int earnedMarks = 0;
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            for (int i = 0; i < Questions.Length; i++)
             {
+                var question = Questions[i];
                 if (question != null)
                 {
+                    Console.WriteLine($"# Question {i + 1} : {question.Body}");
                     question.DisplayQuestion();
-                    Console.WriteLine($"Right Answer: {question.AnswerList[0].AnswerText}");
+
+                    Console.Write("Your Answer => ");
+                    int userAnswerId = int.Parse(Console.ReadLine());
+
+                    string userAnswerText = question.AnswerList[userAnswerId - 1].AnswerText;
+                    string rightAnswerText = question.AnswerList[0].AnswerText;
+
+                    Console.WriteLine($"Your Answer => {userAnswerText}");
+                    Console.WriteLine($"Right Answer => {rightAnswerText}");
+
+                    if (userAnswerId == question.AnswerList[0].AnswerId)
+                    {
+                        earnedMarks += question.Mark;
+                    }
+
+                    totalMarks += question.Mark;
                 }
             }
+
+            stopwatch.Stop();
+            Console.WriteLine($"Your Grade is {earnedMarks} from {totalMarks}");
+            Console.WriteLine($"Time = {stopwatch.Elapsed}");
+            Console.WriteLine("Thank You");
         }
     }
 }
